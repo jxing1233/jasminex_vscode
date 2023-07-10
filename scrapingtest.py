@@ -174,7 +174,7 @@ def months_years_case(age):
 
 def get_info1(strong):
     age_display = ""
-    age = "ALL"
+    age = [0,12000]
     person_type = strong[-1]
     split_person = person_type.split()
     # print(split_person)
@@ -260,5 +260,5 @@ r = requests.get(url)
 soup = BeautifulSoup(r.content, 'html5lib') # tells beautifulsoup that it's in html5, look for tags/classes
 # print(soup)
 all_trials = fetch_data()
-print(all_trials["age"])
+#print(all_trials["age"])
 

@@ -8,10 +8,15 @@ app = Flask(__name__)
 def sorted_age():
     all_dict = scrapingtest.fetch_data()
     print(all_dict["age"])
-    # order = sorted(list(range(len(all_dict["age"]))), key=lambda i: all_dict["age"][i][0])
+    order = sorted(list(range(len(all_dict["age"]))), key=lambda i: all_dict["age"][i][0])
+    print('\n\n\n')
+    print(order)
+    print('\n\n\n')
+    print(all_dict.keys())
+
     # 
     # return order
-    return all_dict["age"]
+    return "done"
 # ghost printing the ages
 
 @app.route("/321")
