@@ -32,7 +32,7 @@ class TrialsList:
         }
       )
     json_data = {
-      "trial": trial_data
+      "trials": trial_data
     }
     return json_data
   
@@ -62,15 +62,15 @@ class TrialsList:
     # DO stuff here to the new list
     return new_trials_list
 
-trials = TrialsList()
-x = ClinicalTrial('Nightmares','ALL','Sleep', [45,60])
-y = ClinicalTrial('Tallness','F','Height', [40,70])
-z = ClinicalTrial('Soda','M','Health', [20,100])
-trials.append(x)
-trials.append(y)
-trials.append(z)
-print(trials.count())
-trials.print_trials_data()
-#print(trials.get_json())
+# trials = TrialsList()
+# x = ClinicalTrial('Nightmares','ALL','Sleep', [45,60])
+# y = ClinicalTrial('Tallness','F','Height', [40,70])
+# z = ClinicalTrial('Soda','M','Health', [20,100])
+# trials.append(x)
+# trials.append(y)
+# trials.append(z)
+# print(trials.count())
+# #trials.print_trials_data()
+# print(trials.get_json())
 
-trials.filter(age = 45, gender="M")
+# trials.filter(age = 45, gender="M")

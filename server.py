@@ -1,23 +1,17 @@
 from flask import Flask, request, jsonify
 import json
 import scrapingtest
+
+from ClinicalTrial import ClinicalTrial
+from TrialsList import TrialsList
+
 app = Flask(__name__)
 
-@app.route("/get_age", methods = ["GET", "POST"])
+@app.route("/get_trials", methods = ["GET", "POST"])
+def get_trials():
+    all_trials = scrapingtest.fetch_data()
+    return all_trials.get_json()
 
-def sorted_age():
-    all_dict = scrapingtest.fetch_data()
-    print(all_dict["age"])
-    order = sorted(list(range(len(all_dict["age"]))), key=lambda i: all_dict["age"][i][0])
-    print('\n\n\n')
-    print(order)
-    print('\n\n\n')
-    print(all_dict.keys())
-
-    # 
-    # return order
-    return "done"
-# ghost printing the ages
 
 @app.route("/321")
 

@@ -1,10 +1,10 @@
 class ClinicalTrial:
 
   def __init__(self, name, gender, focus, age_range = [0,1200]):
-    self.name = name
-    self.gender = gender
-    self.focus = focus
-    self.age_range = age_range
+    self.name = name            # String
+    self.gender = gender        # String [ALL, female, male]
+    self.focus = focus          # List of Strings
+    self.age_range = age_range  # List of 2 numbers represeting months
 
 
   def get_display_ages(self):
