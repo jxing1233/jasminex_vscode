@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup #bs4 larger folder with beautifulsoup & other thin
 from collections import defaultdict
 import re
 
+from clinicaltrial import clinicaltrial
+from trialslist import trialslist
+
 def strong_format(a_list):
     for i in range(len(a_list)): # loop by index
         a_list[i] = a_list[i].text
@@ -174,7 +177,7 @@ def months_years_case(age):
 
 def get_info1(strong):
     age_display = ""
-    age = "ALL"
+    age = [0, 12000]
     person_type = strong[-1]
     split_person = person_type.split()
     # print(split_person)
@@ -216,14 +219,22 @@ get_info1(["healthy people", "ages 4 years to 9 years"])
 
 
 def fetch_data(): # code to scrape data
-    data = defaultdict(list) # dictionary w/ values that are lists
+
+    # get latest trials
+    url = 'https://ucla.clinicaltrials.researcherprofiles.org/browse/healthy'
+    r = requests.get(url)
+    soup = BeautifulSoup(r.content, 'html5lib') # tells beautifulsoup that it's in html5, look for tags/classes
+
+
+    trials = trialslist()
+    # data = defaultdict(list) # dictionary w/ values that are lists
     info = soup.find('ul', attrs = {'class':'list-unstyled'}) # first one it finds
     # info = info.prettify()
     # print(info)
     info2 = info.find_all('div', attrs = {'class': 'card-body'}) # puts into list
     # print(info2[0])
     # newset = set()
-    a_dict = { "name": [], "person": [], "focus": [], "age_display": [], "age": [] }
+    a_dict = { "name": [], "person": [], "focus": [], "age_display": [], "age": [], "link": [] }
     for i in info2:
         a = i.find('a', attrs = {'class': 'stretched-link'})
         # print(name.text) # part of beautifulsoup
@@ -245,20 +256,27 @@ def fetch_data(): # code to scrape data
         a_dict["focus"].append(focus)
         a_dict["age_display"].append(age_display)
         a_dict["age"].append(age)
+        a_dict["link"].append(link)
+        ct = clinicaltrial(name, person, focus, age, link)
+        # print(ct)
+        trials.append(ct)
         # print(a_dict)
         # print(person, focus, age_display, age)
         # print(get_info1(strong))
     # print(a_dict)
-    return a_dict
+    return trials
     # print(newset)
 
 
 
-url = 'https://ucla.clinicaltrials.researcherprofiles.org/browse/healthy'
-r = requests.get(url)
+
+
+
 # print(r.content) # r.content gets the data from the url
-soup = BeautifulSoup(r.content, 'html5lib') # tells beautifulsoup that it's in html5, look for tags/classes
+
 # print(soup)
-all_trials = fetch_data()
-print(all_trials["age"])
+#  all_trials = fetch_data()
+#  all_trials.print_trials_data()
+#  print(all_trials.get_json())
+# print(all_trials["age"])
 
