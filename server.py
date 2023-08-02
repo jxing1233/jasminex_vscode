@@ -1,8 +1,7 @@
 from flask import Flask, request, jsonify
 import json
 import scrapingtest
-
-
+import trialslist
 
 app = Flask(__name__)
 
@@ -20,15 +19,44 @@ def get_trials():
         # 3
     # return "done"
 
-@app.route("/321")
+@app.route("/user_info_trials", methods = ["GET", "POST"]) 
 
-def new_func():
-    return "hello"
+def user_info_trials():
+    age = request.form["age"] # get info from age in postman, not somewhere on the internet where others can access
+    if age == "z":
+        age = None
+    else:
+        age = int(age) * 12
+    gender = request.form["gender"]
+    if gender == "z":
+        gender = None
+    focus = request.form["focus"]
+    if focus == "z":
+        focus = None
+    sort_by = request.form["sort"]
+    all_trials = scrapingtest.fetch_data() # trialslist of all data
+    set_of_focuses = set()
+    for i in all_trials.trials:
+        for j in i.focus:
+            set_of_focuses.add(j)
+    print(set_of_focuses)
+    all_trials.trials = all_trials.filter(age = age, gender = gender, focus = focus)
+    # a = age, b = gender, c = focus, z = none, n = name (alphabetical)
+    if sort_by == "a":
+        all_trials.sort_age()
+    elif sort_by == "n":
+        all_trials.sort_name()
+    # elif sort_by == "b":
+        # all_trials.sort_gender()
+    # elif sort_by == "c":
+        # all_trials.sort_focus()
 
-@app.route("/world")
-
-def world_func():
-    return "world"
+    # for i in all_trials.trials:
+        # print(i.get_age_range())
+    # print(all_trials.trials)
+    return all_trials.get_json()
+    
+    # return "6"
 
 # another file can't run this piece
 if __name__ == "__main__":

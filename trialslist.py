@@ -41,50 +41,81 @@ class trialslist:
     
     def sort_age(self):
         # self.trials_sorted = []
-        for i in range(self.count() - 1):
-            # starter = i
-            for j in range(self.count() - 1):
-                if self.trials[j].age_range[0] >= self.trials[j + 1].age_range[0]:
-                    self.trials[j], self.trials[j+1] = self.trials[j+1], self.trials[j]
-                    # starter+=1
-                elif self.trials[j].age_range[0] >= self.trials[j + 1].age_range[0]:
-                    if self.trials[j].age_range[1] >= self.trials[j + 1].age_range[1]:
-                        self.trials[j], self.trials[j+1] = self.trials[j+1], self.trials[j]
-                        # starter+=1
+        self.trials = sorted(self.trials, key=lambda element: (element.age_range[0], element.age_range[1])) # sorts the input
+        # element = every item looping through
+        # lambda function
+        # each element in self.trials
                 # add case if the initial ages are equal --> go to end ages, if age ranges identical, order is alphabetical
+        # print(self.trials)
         return self.trials
 
     def sort_focus(self):
+        self.trials = sorted(self.trials, key=lambda element: (element.focus))
+        '''
         for i in range(self.count() - 1):
             for j in range(self.count() - 1):
                 if self.trials[j].focus >= self.trials[j + 1].focus:
                     self.trials[j], self.trials[j+1] = self.trials[j+1], self.trials[j]
+        '''
         return self.trials
 
+    # alphabetical order name
     def sort_name(self):
+        self.trials = sorted(self.trials, key=lambda element: (element.name))
+        '''
         for i in range(self.count() - 1):
             for j in range(self.count() - 1):
                 if self.trials[j].name >= self.trials[j + 1].name:
                     self.trials[j], self.trials[j+1] = self.trials[j+1], self.trials[j]
+        '''
         return self.trials
 
     def sort_gender(self):
+        self.trials = sorted(self.trials, key=lambda element: (element.gender))
+        '''
         for i in range(self.count() - 1):
             for j in range(self.count() - 1):
                 if self.trials[j].gender >= self.trials[j + 1].gender:
                     self.trials[j], self.trials[j+1] = self.trials[j+1], self.trials[j]
+        '''
         return self.trials
 
     def filter(self, focus=None, age=None, gender=None): # none = null, filter only by one instead of all, can ignore the ones = None, in calling function, say focus = ""
+        '''
         new_trials_list = []
         for t in self.trials:
-            if focus and t.focus == focus:
+            if focus and focus in t.focus:
                 new_trials_list.append(t)
-        pass
+            elif age and age <= t.age_range[1] and age >= t.age_range[0]:
+                new_trials_list.append(t)
+            elif gender and (gender == t.gender or t.gender == "ALL"):
+                new_trials_list.append(t)
 
+        for i in new_trials_list:
+            if not (focus and focus in t.focus and age and age <= t.age_range[1] and age >= t.age_range[0] and gender and (gender == t.gender or t.gender == "ALL")):
+                new_trials_list.remove(i)
+        '''
+        new_trials_list = []
+        for t in self.trials:
+            if focus and focus in t.focus and age and age <= t.age_range[1] and age >= t.age_range[0] and gender and (gender == t.gender or t.gender == "ALL"):
+                new_trials_list.append(t)
+            elif focus and focus in t.focus and age and focus in t.focus and age <= t.age_range[1] and age >= t.age_range[0] and not gender:
+                new_trials_list.append(t)
+            elif focus and focus in t.focus and gender and (gender == t.gender or t.gender == "ALL") and not age:
+                new_trials_list.append(t)
+            elif gender and (gender == t.gender or t.gender == "ALL") and age and age <= t.age_range[1] and age >= t.age_range[0] and not focus:
+                new_trials_list.append(t)
+            elif gender and (gender == t.gender or t.gender == "ALL") and not focus and not age:
+                new_trials_list.append(t)
+            elif focus and focus in t.focus and not age and not gender:
+                new_trials_list.append(t)
+            elif age and age <= t.age_range[1] and age >= t.age_range[0] and not gender and not focus:
+                new_trials_list.append(t)
+            elif not gender and not focus and not age:
+                new_trials_list.append(t)
+        return new_trials_list
 
         
-
 
 
 trials = trialslist()
@@ -98,10 +129,13 @@ print(trials.count())
 trials.print_trials()
 trials.print_trials_data()
 #print(trials.get_json())
-trials.sort_age()
+#trials.sort_age()
 #trials.print_trials_data()
-#trials.sort_focus()
-#trials.sort_name()
-#trials.sort_gender()
+trials.sort_focus()
+trials.print_trials_data()
+trials.sort_name()
+trials.print_trials_data()
+trials.sort_gender()
+trials.print_trials_data()
 list1 = trials.filter(age = 45, gender = "M")
 print(list1)
