@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 def get_trials():
     all_trials = scrapingtest.fetch_data()
+    print(all_trials)
     return all_trials.get_json()
     # print(all_dict["age"])
     # order = sorted(list(range(len(all_dict["age"]))), key=lambda i: all_dict["age"][i][0])
