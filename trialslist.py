@@ -35,6 +35,7 @@ class trialslist:
         json_data = {
             'trial': trial_data
         }
+        print(json_data)
         return json_data
     
     # try implementing the following files for hw
@@ -115,9 +116,21 @@ class trialslist:
                 new_trials_list.append(t)
         return new_trials_list
 
-        
+    def all_focuses(self):
+        set_of_focuses = set()
+        for i in self.trials:
+            for g in i.get_focus():
+                set_of_focuses.add(g)
+        list_of_focuses = list(set_of_focuses)
+        return list_of_focuses
+    
+    '''
+    def concatenate(self, other_list): # pass in only the second list
+        self.trials.
+    '''
 
 
+'''
 trials = trialslist()
 x = clinicaltrial('Nightmares', 'ALL', 'Sleep', [45, 60], 'https://www.google.com/')
 y = clinicaltrial('Soda', 'M', 'Health', [20, 60], 'https://www.google.com/')
@@ -139,3 +152,4 @@ trials.sort_gender()
 trials.print_trials_data()
 list1 = trials.filter(age = 45, gender = "M")
 print(list1)
+'''

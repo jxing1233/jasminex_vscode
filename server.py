@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import json
 import scrapingtest
 import trialslist
+import database
 
 app = Flask(__name__)
 
@@ -9,6 +10,9 @@ app = Flask(__name__)
 
 def get_trials():
     all_trials = scrapingtest.fetch_data()
+    trials_list2 = database.get_data()
+    all_trials.trials = all_trials.trials + trials_list2.trials
+    
     return all_trials.get_json()
     # print(all_dict["age"])
     # order = sorted(list(range(len(all_dict["age"]))), key=lambda i: all_dict["age"][i][0])
@@ -22,7 +26,9 @@ def get_trials():
 @app.route("/user_info_trials", methods = ["GET", "POST"]) 
 
 def user_info_trials():
+    print("1234")
     age = request.form["age"] # get info from age in postman, not somewhere on the internet where others can access
+    print(age)
     if age == "z":
         age = None
     else:
@@ -34,7 +40,10 @@ def user_info_trials():
     if focus == "z":
         focus = None
     sort_by = request.form["sort"]
+    print(age, gender, focus, sort_by)
     all_trials = scrapingtest.fetch_data() # trialslist of all data
+    trials_list2 = database.get_data()
+    all_trials.trials = all_trials.trials + trials_list2.trials
     set_of_focuses = set()
     for i in all_trials.trials:
         for j in i.focus:
@@ -55,7 +64,13 @@ def user_info_trials():
         # print(i.get_age_range())
     # print(all_trials.trials)
     return all_trials.get_json()
-    
+
+@app.route("/get_focuses", methods = ["GET", "POST"])
+
+def get_focuses():
+    all_trials = scrapingtest.fetch_data()
+    return all_trials.all_focuses()
+
 @app.route('/test')
 
 def hh():
