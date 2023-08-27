@@ -26,9 +26,9 @@ def get_trials():
 
 @app.route("/user_info_trials", methods = ["GET", "POST"]) 
 def user_info_trials():
-    print("1234")
+    # print("1234")
     age = request.form["age"] # get info from age in postman, not somewhere on the internet where others can access
-    print(age)
+    # print(age)
     if age == "z":
         age = None
     else:
@@ -48,7 +48,7 @@ def user_info_trials():
     for i in all_trials.trials:
         for j in i.focus:
             set_of_focuses.add(j)
-    print(set_of_focuses)
+    # print(set_of_focuses)
     all_trials.trials = all_trials.filter(age = age, gender = gender, focus = focus)
     # a = age, b = gender, c = focus, z = none, n = name (alphabetical)
     if sort_by == "a":
@@ -111,24 +111,24 @@ def recommendation():
             trialRecommendations.append(trial)
 
     print(age, gender, ethnicity)
-    trialRecommendations.print_trials_data()
+    # trialRecommendations.print_trials_data()
     return trialRecommendations.get_json()
 
 
 
-[
-    "The Evaluation of PC14586 in Patients With Advanced Solid Tumors Harboring a p53 Y220C Mutation (PYNNACLE)", 
-    "Adaptation of the PCIP for Children Aged 6 to 11", 
-    "The Effect of Opioid-Free Anesthesia in TMJ Surgery", 
-    "A Study to Evaluate the Safety, Reactogenicity, and Effectiveness of mRNA-1273 Vaccine in Adolescents 12 to <18 Years Old to Prevent COVID-19", 
-    "Pilot Study for OCT Guided In Vivo Laser Capture Microdissection for Assessing the Prognosis of Barrett's Esophagus"
-    ]
+# [
+#     "The Evaluation of PC14586 in Patients With Advanced Solid Tumors Harboring a p53 Y220C Mutation (PYNNACLE)", 
+#     "Adaptation of the PCIP for Children Aged 6 to 11", 
+#     "The Effect of Opioid-Free Anesthesia in TMJ Surgery", 
+#     "A Study to Evaluate the Safety, Reactogenicity, and Effectiveness of mRNA-1273 Vaccine in Adolescents 12 to <18 Years Old to Prevent COVID-19", 
+#     "Pilot Study for OCT Guided In Vivo Laser Capture Microdissection for Assessing the Prognosis of Barrett's Esophagus"
+#     ]
 
-["A Study of Daily Oral Orforglipron (LY3502970) Compared With Insulin Glargine in Participants With Type 2 Diabetes and Obesity or Overweight at Increased Cardiovascular Risk", 
- "A Phase 1b/2 Study of BGB-11417in Monotherapy and in Various Combinations With Dexamethasone and Carfilzomib in Multiple Myeloma", 
- "Protective Ventilation With High Versus Low PEEP During One-lung Ventilation for Thoracic Surgery", 
- "A Study of Teclistamab in Combination With Daratumumab Subcutaneously (SC) (Tec-Dara) Versus Daratumumab SC, Pomalidomide, and Dexamethasone (DPd) or Daratumumab SC, Bortezomib, and Dexamethasone (DVd) in Participants With Relapsed or Refractory Multiple Myeloma", 
- "Circuit-Based Approach to Suicide: Biomarkers, Predictors, and Novel Therapeutics"]
+# ["A Study of Daily Oral Orforglipron (LY3502970) Compared With Insulin Glargine in Participants With Type 2 Diabetes and Obesity or Overweight at Increased Cardiovascular Risk", 
+#  "A Phase 1b/2 Study of BGB-11417in Monotherapy and in Various Combinations With Dexamethasone and Carfilzomib in Multiple Myeloma", 
+#  "Protective Ventilation With High Versus Low PEEP During One-lung Ventilation for Thoracic Surgery", 
+#  "A Study of Teclistamab in Combination With Daratumumab Subcutaneously (SC) (Tec-Dara) Versus Daratumumab SC, Pomalidomide, and Dexamethasone (DPd) or Daratumumab SC, Bortezomib, and Dexamethasone (DVd) in Participants With Relapsed or Refractory Multiple Myeloma", 
+#  "Circuit-Based Approach to Suicide: Biomarkers, Predictors, and Novel Therapeutics"]
 
 
 
