@@ -55,10 +55,10 @@ def get_info(strong):
         matches = re.findall("[0-9]+.month", age)
         years = convert_m_to_y(matches)
         for i in range(len(matches)):
-            print(age)
+            # print(age)
             index = age.find(matches[i])
-            print(matches[i])
-            print(index)
+            # print(matches[i])
+            # print(index)
             age = years[i] + age[index + len(matches[i]):]
         
     # print(focus)
@@ -89,7 +89,7 @@ def fetch_data(): # code to scrape data
         # print(strong)
         # newset.add(split_person[1])
         person, focus, age = get_info(strong)
-        print(person, focus, age)
+        # print(person, focus, age)
         # print(get_info(strong))
     # print(newset)
 
