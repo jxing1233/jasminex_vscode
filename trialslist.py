@@ -37,7 +37,7 @@ class trialslist:
         json_data = {
             'trial': trial_data
         }
-        print(json_data)
+        # print(json_data)
         return json_data
     
     # try implementing the following files for hw
