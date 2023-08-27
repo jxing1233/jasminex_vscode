@@ -257,7 +257,7 @@ def fetch_data(): # code to scrape data
         a_dict["age_display"].append(age_display)
         a_dict["age"].append(age)
         a_dict["link"].append(link)
-        ct = clinicaltrial(name, person, focus, age, link, 'N/A', 'N/A', 'N/A')
+        ct = clinicaltrial(name, person, focus, age, link, 'UCLA', 'N/A', 'N/A')
         # print(ct)
         trials.append(ct)
         # print(a_dict)

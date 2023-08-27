@@ -30,6 +30,8 @@ class trialslist:
                     'focus':t.focus,
                     'age_range':t.age_range,
                     'link':t.link,
+                    'location': t.location,
+                    'ethnicity': t.ethnicity
                 }
             )
         json_data = {

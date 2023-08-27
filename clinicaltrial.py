@@ -4,7 +4,7 @@ class clinicaltrial:
 
     def __init__(self, name, person, focus, age, link, location, start_month, ethnicity): # person = gender, age = age range
         self.name = name # string
-        self.gender = person # string [ALL, female, male]
+        self.gender = person.lower() # string [ALL, female, male]
         self.focus = focus # list of strings
         self.age_range = age # list [starting_age, ending_age], list of 2 nums in months
         self.link = link
