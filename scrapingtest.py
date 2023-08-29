@@ -177,7 +177,7 @@ def months_years_case(age):
 
 def get_info1(strong):
     age_display = ""
-    age = [0, 12000]
+    age = [0, 1200]
     person_type = strong[-1]
     split_person = person_type.split()
     # print(split_person)

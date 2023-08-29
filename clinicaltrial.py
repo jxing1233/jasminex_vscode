@@ -13,6 +13,7 @@ class clinicaltrial:
         self.ethnicity = ethnicity
 
 
+
     def get_age_range(self):
         return self.age_range
 
