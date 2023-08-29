@@ -120,7 +120,7 @@ def and_up_case(age):
             display_age = display_age + str(num_m) + " month"
         else: 
             display_age = display_age + str(num_m) + " months"
-    age_list.append(1000*12)
+    age_list.append(100*12)
     return display_age, age_list
     # up to 100 years
 
